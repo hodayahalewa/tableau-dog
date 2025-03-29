@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add CSP meta tag to allow Tableau embedding -->
+    <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://public.tableau.com; script-src 'self' https://public.tableau.com;">
     <title>מרכז ניתוח נתונים 📊✨</title>
     <style>
         body {
@@ -74,7 +76,7 @@
 
         .tableau-container {
             position: relative;
-            padding-bottom: 56.25%; /* יחס גובה-רוחב של 16:9 */
+            padding-bottom: 75%; /* Adjusted aspect ratio */
             height: 0;
             overflow: hidden;
             background: #fff;
@@ -126,7 +128,7 @@
             <h2>Interactive Tableau Dashboard 🎨</h2>
             <p>צלול לנתונים שלנו ממש כאן! 👇</p>
             <div class="tableau-container">
-                <iframe src="https://public.tableau.com/views/Doganalist/Dashboard1?:language=en-GB&:display_count=n&:origin=viz_share_link"
+                <iframe src="https://public.tableau.com/views/Doganalist/Dashboard1?:language=en-GB&:display_count=n&:origin=viz_share_link&:embed=y&:showVizHome=n&:apiID=host0"
                     allowfullscreen></iframe>
             </div>
         </div>
@@ -140,5 +142,20 @@
     <footer id="contact">
         <p>© 2025 מרכז ניתוח נתונים | נוצר עם ❤️ ו-☕ | צור קשר: hello@datahub.com</p>
     </footer>
+
+    <script>
+        // Check if iframe loads successfully
+        window.onload = function() {
+            const iframe = document.querySelector('iframe');
+            iframe.addEventListener('load', () => {
+                console.log('Tableau Dashboard loaded successfully!');
+            });
+            setTimeout(() => {
+                if (!iframe.contentDocument || iframe.contentDocument.body.innerHTML === '') {
+                    console.error('Tableau Dashboard failed to load. Check CSP or embed settings.');
+                }
+            }, 5000); // Check after 5 seconds
+        };
+    </script>
 </body>
 </html>
