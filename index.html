@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Add CSP meta tag to allow Tableau embedding -->
+    <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://public.tableau.com">
     <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://public.tableau.com; script-src 'self' https://public.tableau.com;">
     <title>מרכז ניתוח נתונים 📊✨</title>
     <style>
@@ -76,7 +76,7 @@
 
         .tableau-container {
             position: relative;
-            padding-bottom: 75%; /* Adjusted aspect ratio */
+            padding-bottom: 75%;
             height: 0;
             overflow: hidden;
             background: #fff;
@@ -128,7 +128,7 @@
             <h2>Interactive Tableau Dashboard 🎨</h2>
             <p>צלול לנתונים שלנו ממש כאן! 👇</p>
             <div class="tableau-container">
-                <iframe src="https://public.tableau.com/views/Doganalist/Dashboard1?:language=en-GB&:display_count=n&:origin=viz_share_link&:embed=y&:showVizHome=n&:apiID=host0"
+                <iframe src="https://public.tableau.com/views/Doganalist/Dashboard1?:language=en-GB&:embed=y&:showVizHome=n&:display_count=n&:origin=viz_share_link"
                     allowfullscreen></iframe>
             </div>
         </div>
@@ -144,17 +144,17 @@
     </footer>
 
     <script>
-        // Check if iframe loads successfully
+        // בדיקת טעינת ה-iframe
         window.onload = function() {
             const iframe = document.querySelector('iframe');
             iframe.addEventListener('load', () => {
-                console.log('Tableau Dashboard loaded successfully!');
+                console.log('הדשבורד נטען בהצלחה!');
             });
             setTimeout(() => {
                 if (!iframe.contentDocument || iframe.contentDocument.body.innerHTML === '') {
-                    console.error('Tableau Dashboard failed to load. Check CSP or embed settings.');
+                    console.error('הדשבורד לא נטען. בדוק את הגדרות Tableau או את שרת האירוח.');
                 }
-            }, 5000); // Check after 5 seconds
+            }, 5000);
         };
     </script>
 </body>
