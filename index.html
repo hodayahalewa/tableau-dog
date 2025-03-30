@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://public.tableau.com">
-    <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://public.tableau.com; script-src 'self' https://public.tableau.com;">
-    <title> מרכז ניתוח נתונים על כלבים 📊✨</title> 
+    <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://public.tableau.com; script-src 'self' https://public.tableau.com; img-src 'self' https://* data:;">
+    <title>מרכז ניתוח נתונים 📊✨</title>
     <style>
         body {
             font-family: 'Rubik', Arial, sans-serif;
@@ -92,6 +91,33 @@
             border: none;
         }
 
+        .dog-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .dog-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .dog-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .questions {
+            margin-top: 15px;
+            padding-right: 20px;
+        }
+
+        .questions li {
+            margin-bottom: 10px;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -114,12 +140,13 @@
 <body>
     <header>
         <h1>מרכז ניתוח נתונים 📈🚀</h1>
-        <p> תובנות בסטייל על כלבים!  ✨</p>
+        <p>תובנות בסטייל! ✨</p>
     </header>
 
     <nav>
         <a href="#dashboard">דשבורד 🌟</a>
         <a href="#insights">תובנות 💡</a>
+        <a href="#dogs">כלבים 🐶</a>
         <a href="#contact">צור קשר 📬</a>
     </nav>
 
@@ -136,6 +163,27 @@
         <div class="section" id="insights">
             <h2>תובנות נתונים 💡</h2>
             <p>גלה מגמות ודפוסים בזמן אמת! תישאר צעד אחד קדימה! 🌈</p>
+            <p>נקודות למחשבה:</p>
+            <ul class="questions">
+                <li>האם כלבים קטנים חיים באמת יותר זמן?</li>
+                <li>האם כלבים מעדיפים צבעים מסוימים בצעצועים שלהם?</li>
+                <li>האם גזעי כלבים שונים חולמים בדרכים שונות?</li>
+                <li>האם כלבים יכולים לזהות רגשות אנושיים דרך ריח?</li>
+                <li>האם כלבים גדולים זקוקים ליותר פעילות גופנית?</li>
+                <li>האם תזונה משפיעה על אורך החיים של כלבים?</li>
+                <li>האם כלבים מבינים את המושג של זמן כמו בני אדם?</li>
+            </ul>
+        </div>
+
+        <div class="section" id="dogs">
+            <h2>כלבים חמודים לעת עתה 🐾</h2>
+            <p>במחקר המטורף שאנחנו עומדים לעשות בשבועות הקרובים, נגלה אם כלבים באמת שולטים בעולם (או לפחות בלב שלנו)! לעדכונים חמים מהשטח, תישארו איתנו ותעקבו – כי מי יודע, אולי הכלב שלכם הוא הבוס האמיתי פה! 😉</p>
+            <p>בינתיים, תיהנו מתמונות של כמה כלבים שגורמים לנו לנבוח מרוב צחוק!</p>
+            <div class="dog-gallery">
+                <img src="https://place-puppy.com/300x300" alt="כלב חמוד 1">
+                <img src="https://place-puppy.com/301x301" alt="כלב חמוד 2">
+                <img src="https://place-puppy.com/302x302" alt="כלב חמוד 3">
+            </div>
         </div>
     </div>
 
@@ -144,7 +192,7 @@
     </footer>
 
     <script>
-        // בדיקת טעינת ה-iframe
+        // בדיקת טעינת ה-iframe והתמונות
         window.onload = function() {
             const iframe = document.querySelector('iframe');
             iframe.addEventListener('load', () => {
@@ -155,6 +203,16 @@
                     console.error('הדשבורד לא נטען. בדוק את הגדרות Tableau או את שרת האירוח.');
                 }
             }, 5000);
+
+            const images = document.querySelectorAll('.dog-gallery img');
+            images.forEach(img => {
+                img.addEventListener('error', () => {
+                    console.error(`תמונה לא נטענה: ${img.src}`);
+                });
+                img.addEventListener('load', () => {
+                    console.log(`תמונה נטענה בהצלחה: ${img.src}`);
+                });
+            });
         };
     </script>
 </body>
